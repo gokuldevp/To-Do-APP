@@ -1,12 +1,138 @@
 <!DOCTYPE html>
+<!-- HTML document type declaration -->
+
 <html lang="en">
+<!-- Start of HTML document with English language -->
+
 <head>
+    <!-- Head section of the document containing metadata -->
+
     <meta charset="UTF-8">
+    <!-- Character encoding set to UTF-8 -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Setting the viewport for better responsiveness on various devices -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Link to Font Awesome CSS for icons -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Link to Bootstrap CSS (Bootstrap version 5.0.2) -->
+
     <title><%= title %></title>
+    <!-- Title of the document dynamically generated from the template variable "title" -->
+
 </head>
-<body>
-    <h1><%= title %></h1>
-    
+
+<body class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<!-- Body of the document with classes for flexbox alignment -->
+<!-- d-flex: Display the element as a flex container
+     justify-content-center: Horizontally center the flex items
+     align-items-center: Vertically center the flex items
+     min-height: Set the minimum height of the body to fill the viewport height -->
+
+    <div class="container">
+    <!-- Container to hold the content -->
+
+        <h1 class="my-4 text-center"><%= title %></h1>
+        <!-- Heading level 1 with margin and centered text, dynamically generated from the template variable "title" -->
+
+        <form action="/add-task" method="post">
+        <!-- Form element with action set to "/add-task" and method set to "post" -->
+
+            <div class="mb-3">
+                <label for="task" class="form-label">Enter your Task:</label>
+                <!-- Label for the "task" input field -->
+
+                <input type="text" class="form-control" name="task" id="task" required>
+                <!-- Text input field for entering the task, with form control class and "task" as name and id -->
+
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category:</label>
+                <!-- Label for the "category" select field -->
+
+                <select class="form-select" name="category" id="category" required>
+                    <!-- Select input field for choosing the task category, with form select class and "category" as name and id -->
+
+                    <option value="School">School</option>
+                    <option value="Work">Work</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Health">Health</option>
+                    <!-- Options for different categories -->
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="date" class="form-label">Due Date:</label>
+                <!-- Label for the "date" input field -->
+
+                <input type="date" class="form-control" name="date" id="date" required>
+                <!-- Date input field for selecting the due date, with form control class and "date" as name and id -->
+
+            </div>
+
+            <button type="submit" class="btn btn-primary d-block mx-auto">Add Task</button>
+            <!-- Submit button to add the task, with primary button style and centered using flexbox -->
+
+        </form>
+        <br>
+        <!-- Line break for spacing -->
+
+        <div class="task-list" id="task-list">
+        <!-- Container to display the list of tasks -->
+
+            <ol class="list-group card">
+            <!-- Ordered list with list group and card classes for styling -->
+
+                <% tasks.forEach((task) => { %>
+                <!-- Loop through the tasks array and render each task -->
+
+                    <li class="list-group-item">
+                    <!-- List item with list group item class -->
+
+                        <p><strong>Task:</strong> <%= task.task %></p>
+                        <!-- Paragraph to display the task name, with strong tag for bold text, dynamically generated from the task object -->
+
+                        <p><strong>Category:</strong> <%= task.category %></p>
+                        <!-- Paragraph to display the task category, with strong tag for bold text, dynamically generated from the task object -->
+
+                        <p><strong>Due Date:</strong> <%= task.date %></p>
+                        <!-- Paragraph to display the due date, with strong tag for bold text, dynamically generated from the task object -->
+
+                        <a href="/delete-task/<%= task._id %>" class="btn btn-danger d-block mx-auto">
+                        <!-- Anchor tag with link to delete the task, with danger button style and centered using flexbox -->
+
+                            <i class="fas fa-trash"></i> Delete Task
+                            <!-- Font Awesome icon for trash bin -->
+
+                        </a>
+                    </li>
+
+                <% }) %>
+                <!-- End of tasks loop -->
+
+            </ol>
+            <!-- End of ordered list -->
+
+        </div>
+        <!-- End of task-list container -->
+
+    </div>
+    <!-- End of container -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.1/umd/popper.min.js"></script>
+    <!-- Popper.js script for Bootstrap -->
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap script -->
+
 </body>
+<!-- End of body -->
+
 </html>
+<!-- End of HTML document -->

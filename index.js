@@ -1,18 +1,31 @@
+// Require the Express library to create an Express application
 const express = require('express');
-const app = express()
+
+// Create a new Express application
+const app = express();
+
+// Define the port number on which the server will listen
 const port = 8000;
 
-// middleware to use router
-app.use("/", require('./routes'))
+// Add middleware to parse request bodies (for handling form data in POST requests)
+app.use(express.urlencoded({ extended: true }));
 
-// setup view engine
+// Middleware to use the router for handling routes
+// The router is imported from the "./routes" file
+// The "/" route is used as the base URL for the router's routes
+app.use("/", require('./routes'));
+
+// Setup view engine to use EJS as the template engine
+// The view engine will look for EJS templates in the "./views" directory
 app.set('view engine', 'ejs');
-app.set('views', './views')
+app.set('views', './views');
 
-
-app.listen(port, (err) =>{
-    if(err){
-        console.log(`Error while running the server: ${err}`)
+// Start the Express server and listen on the defined port
+app.listen(port, (err) => {
+    if (err) {
+        // If there is an error while starting the server, log the error
+        console.log(`Error while running the server: ${err}`);
     }
-    console.log(`Serrver is running on the port: ${port}`)
+    // If the server starts successfully, log a message indicating the server is running on the specified port
+    console.log(`Server is running on the port: ${port}`);
 });
