@@ -1,3 +1,6 @@
 module.exports.home = (req, res) => {
-    return res.end("<h1>Express is running now<h1>");
+    let renderVariables = {
+        title: "To Do App"
+    }
+    return res.render('home', renderVariables);
 };
